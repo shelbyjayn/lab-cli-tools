@@ -4,21 +4,22 @@ import textwrap
 
 
 def cowsay(text, width=40):
-    wrapped = textwrap.wrap(text, width) if len(text) > width else [text]
+    wrapped = textwrap.wrap(text, width) or [""]
     max_len = max(len(line) for line in wrapped)
     # Build speech bubble
     lines = []
     lines.append(" " + "_" * (max_len + 2))
     if len(wrapped) == 1:
-        lines.append(f"|{wrapped[0].ljust(max_len)}|")
+        lines.append(f"< {wrapped[0].ljust(max_len)} >")
     else:
         for i, line in enumerate(wrapped):
             if i == 0:
-                lines.append(f"/ {line.ljust(max_len)} \\")
+                left, right = "/", "\\"
             elif i == len(wrapped) - 1:
-                lines.append(f"\\ {line.ljust(max_len)} /")
+                left, right = "\\", "/"
             else:
-                lines.append(f"|{line.ljust(max_len)}|")
+                left, right = "|", "|"
+            lines.append(f"{left} {line.ljust(max_len)} {right}")
     lines.append(" " + "-" * (max_len + 2))
     # Add cow
     cow = r"""        \   ^__^
@@ -39,4 +40,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
