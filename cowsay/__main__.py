@@ -34,5 +34,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("text", help="The text for the cow to say")
     args = parser.parse_args()
-    if __name__ == "__main__":
-        main(print(cowsay(args.text)))
+    print(cowsay(args.text))
+
+
+if __name__ == "__main__":
+    main()
+    
